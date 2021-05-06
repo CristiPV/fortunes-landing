@@ -1,0 +1,16 @@
+ENTRY 1
+*-----*
+Date: 06/05/2021 - Time Spent: 1hr, 58mins
+TODO: * Write the Business Plan - I need to do some research about what a Business Plan
+        is and what information I need to provide with it. Afterwards, I need to write
+        the plan.
+      * Create an empty / default React App - I have decided to use a React App for the
+        frontend part of the assignment. For today, I want to only create the default
+        React App which I can later use to make the wheel.
+Summary: I managed to do the research about the Business Plan and write a brief one which
+         describes the product, its target audience, how it will make profit and what costs
+         need to be taken into consideration.
+         I also created a React App in a folder called 'frontend' ( I plan to have the following
+         folder structure for the project: docs - documentation, frontend - frontend app,
+         backend - the backend api ).
+*------*
