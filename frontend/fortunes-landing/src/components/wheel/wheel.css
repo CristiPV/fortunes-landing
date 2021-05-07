@@ -1,0 +1,11 @@
+.wheel-container {
+    display: flex;
+    height: 50vh;
+    width: 50vh;
+}
+
+.wheel-container canvas {
+    background: whitesmoke;
+    height: 100%;
+    width: 100%;
+}
