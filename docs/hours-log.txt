@@ -14,3 +14,23 @@ Summary: I managed to do the research about the Business Plan and write a brief 
          folder structure for the project: docs - documentation, frontend - frontend app,
          backend - the backend api ).
 *------*
+
+ENTRY 2
+*------*
+Date: 07/05/2021 - Time Spent: 04hrs, 48mins
+TODO: * Create the wheel - I need to figure out a way to create a wheel, in the style of
+        a pie chart, which can take a number 'n' and create 'n' amount of equal "slices"
+        within it ( I am thinking to use Canvas for this ).
+      * Think of how to implement the "spin" - I have thought of either having an moving
+        indicator which will move from "slice" to "slice" until it stops on one, or having
+        a static indicator and making the wheel rotate.
+Summary: I managed to draw the wheel in canvas with any 'n' amount of items and I also managed
+         to find a way to draw a little indicator and animate it so that it spins for any given
+         amount of rotations ( 'x' * PI, where, for example, 2 * PI would be 360° = full rotation )
+         ** One problem I encountered was the fact that I wanted the indicator 
+         to slow down as it approached the end of the animation and I figured I could use some sort
+         of exponential function. Due to the fact that I haven't worked with this level of Maths in a 
+         long time, I felt the need to call a friend who studies Maths and see if he could come up with
+         a mathematical function for my use case. Thankfully he did, and I ended up implementing that in 
+         my code.
+*------*
