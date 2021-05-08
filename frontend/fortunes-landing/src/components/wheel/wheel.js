@@ -130,7 +130,7 @@ function Wheel( props ) {
 
     return (
         <div className="wheel-container">
-            <canvas ref={ canvasRef }/>
+            <canvas className="border border-3 border-warning rounded-circle" ref={ canvasRef }/>
             <Button variant="warning" className="spin-button" onClick={ spinWheel }>Spin the Wheel !</Button>
         </div>
     );
