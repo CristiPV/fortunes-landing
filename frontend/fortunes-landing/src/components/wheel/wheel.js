@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useCallback } from 'react';
+import Button from 'react-bootstrap/Button';
 import '../wheel/wheel.css';
 
 function Wheel( props ) {
@@ -130,7 +131,7 @@ function Wheel( props ) {
     return (
         <div className="wheel-container">
             <canvas ref={ canvasRef }/>
-            <button onClick={ spinWheel }></button>
+            <Button variant="warning" className="spin-button" onClick={ spinWheel }>Spin the Wheel !</Button>
         </div>
     );
 }
