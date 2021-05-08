@@ -15,12 +15,12 @@ function Wheel( props ) {
     const circleRadius = 450;
     const canvasSize = 1000;
 
-    function drawCircle( context ) {
+    const drawCircle = useCallback( ( context ) => {
         // Drawing the items
         for( let i in wheelItems ) {
             const startAngle = Number( i ) * ( Math.PI * 2 / wheelItems.length );
             const endAngle = ( Number( i )  + 1 ) * ( Math.PI * 2 / wheelItems.length );
-            console.log( "Angles: ", startAngle, endAngle  );
+            //console.log( "Angles: ", startAngle, endAngle  );
 
             context.save();
 
@@ -44,7 +44,7 @@ function Wheel( props ) {
 
             context.restore();
         }
-    }
+    }, [ wheelItems ] );
 
     function drawIndicator( context, rotation ) {
         context.save();
@@ -53,7 +53,7 @@ function Wheel( props ) {
         context.lineWidth = 30;
         context.beginPath();
         context.translate( canvasSize / 2, canvasSize / 2 );
-        context.rotate( Math.PI * ( 3 / 2 ) + rotation );
+        context.rotate( rotation );
         context.moveTo( circleRadius - 50, 0 );
         context.lineTo( circleRadius, 0 );
         context.stroke();
@@ -61,24 +61,45 @@ function Wheel( props ) {
         context.restore();
     }
 
-    const drawWheel = ( context, rotation ) => {
+    const drawWheel = useCallback( ( context, rotation ) => {
         context.clearRect( 0, 0, canvasSize, canvasSize ); 
         drawCircle( context );
         drawIndicator( context, rotation );
-    };
+    }, [ drawCircle ] );
 
-    useEffect( () => {
+    const generateSpin = useCallback( () => {
+        const random = ( min, max ) => Math.floor( Math.random() * ( max - min ) ) + min;
+        const spin = {};
+
+        // Calculating the spin start
+        const fullSpins =  random( 1, 4 ) * 2;
+        const startPosition = Math.PI * ( 3 / 2 )
+        spin.spinStart = fullSpins * Math.PI + startPosition;
+
+        // Calculating the spin stop
+        const prizeWon = random( 0, wheelItems.length );
+        // The offset can have a range of anywhere 
+        // from 0 * Math.PI / wheelItems.length 
+        // to 2 * Math.PI / wheelItems.length
+        const offset = ( random( 1, 200 ) / 100 ) * Math.PI / wheelItems.length;
+        spin.spinStop = prizeWon * ( 2 * Math.PI / wheelItems.length ) + offset;
+        
+        console.log( fullSpins );
+        console.log( wheelItems[prizeWon] );
+
+        return spin;
+    }, [ wheelItems ] );
+
+    const spinWheel = useCallback( () => {
         const canvas = canvasRef.current;   
         const context = canvas.getContext( "2d" );
-    
-        canvas.width = canvasSize;
-        canvas.height = canvasSize;
+        const spin = generateSpin();        
 
+        let rotation = spin.spinStart;
         let animationFrameId;
-        let rotation = Math.PI * 8;
 
         const render = () => {
-            if ( rotation >= 0 ) {
+            if ( rotation >= spin.spinStop ) {
                 drawWheel( context, rotation ); 
             }
 
@@ -93,15 +114,23 @@ function Wheel( props ) {
         return () => {
             window.cancelAnimationFrame(animationFrameId);
         }
+    }, [ drawWheel, generateSpin ] );   
 
-    }, [drawWheel] );
+    // Drawing the static Wheel when the component mounts.
+    useEffect( () => {
+        const canvas = canvasRef.current;   
+        const context = canvas.getContext( "2d" );
+    
+        canvas.width = canvasSize;
+        canvas.height = canvasSize;
 
-    console.log( "Current Canvas: ", canvasRef.current );
-    console.log( "Props:", props ); 
+        drawWheel( context, Math.PI * ( 3 / 2 ) );
+    }, [ drawWheel ] ); 
 
     return (
         <div className="wheel-container">
             <canvas ref={ canvasRef }/>
+            <button onClick={ spinWheel }></button>
         </div>
     );
 }
