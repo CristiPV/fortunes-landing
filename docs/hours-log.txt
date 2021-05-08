@@ -34,3 +34,18 @@ Summary: I managed to draw the wheel in canvas with any 'n' amount of items and 
          a mathematical function for my use case. Thankfully he did, and I ended up implementing that in 
          my code.
 *------*
+
+ENTRY 3
+*------*
+Date: 08/05/2021 - Time Spent: 2hrs, 30mins
+TODO: * Create a button that triggers the spin.
+      * Figure out a way of selecting which prize is won - I am thinking that I can make it so that
+        the winning prize is decided the moment the button is pushed by using a function to randomly
+        choose one item. I want to further refine it so that once it is decided which prize the indicator
+        has to end up pointing to, a function will generate a random position on the item's 'slice'
+        of the wheel so it simulates a real wheel ( and the indicator doesn't always end up in the
+        center of the item ).
+Summary: I created a button that triggers the indicator to spin around the wheel until it reaches
+         a random location on one of the items.
+         I also imported react-bootstrap and did a bit of styling on the page.
+*------*
