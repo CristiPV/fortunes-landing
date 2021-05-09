@@ -8,15 +8,15 @@ function Wheel( props ) {
 
     // State
 
-
     // Refs
     const canvasRef = useRef( null );
+    const spinButtonRef = useRef( null );
 
     // Variables
     const circleRadius = 450;
     const canvasSize = 1000;
 
-    const drawCircle = useCallback( ( context ) => {
+    const drawCircle = useCallback( ( context ) => {  
         // Drawing the items
         for( let i in wheelItems ) {
             const startAngle = Number( i ) * ( Math.PI * 2 / wheelItems.length );
@@ -26,8 +26,8 @@ function Wheel( props ) {
             context.save();
 
             context.font = "30px Arial";
-            context.fillStyle = wheelItems[i];
-            context.strokeStyle = wheelItems[i];
+            context.fillStyle = wheelItems[i].color;
+            context.strokeStyle = wheelItems[i].color;
             context.lineWidth = 10;
             context.beginPath();
             // Moving the context's drawing point to the middle of the canvas
@@ -41,7 +41,7 @@ function Wheel( props ) {
             context.translate( circleRadius * ( 4 / 5 ), 0 );           // Moves the context down to 4 fifths of the radius
             context.rotate( Math.PI / 2 );                              // Rotates 90° so that the text would be written along the arc
             context.textAlign = 'center';
-            context.fillText( wheelItems[i], 0, 0 );
+            context.fillText( wheelItems[i].name, 0, 0 );
 
             context.restore();
         }
@@ -68,6 +68,34 @@ function Wheel( props ) {
         drawIndicator( context, rotation );
     }, [ drawCircle ] );
 
+    /*
+    Chooses an item in the given list randomly, based in its weight
+    The weight can be seen as a predisposition of that item to be chosen.
+    Note: if the sum of all weights would be 100, they can be thought of as 
+    percentages ( but they don't need to sum up to 100 ).
+    */
+    function chooseItem( items ) {
+        let accumulatedWeight = 0.0;
+        const entries = [];
+
+        for ( let i in items ) {
+            accumulatedWeight += items[i].weight;
+            entries.push( { accumulatedWeight, index: i } );
+        }
+
+        const r = Math.random() * accumulatedWeight;
+        
+        const chosenEntry = entries.find( ( entry ) => {
+            return entry.accumulatedWeight >= r;
+        } );
+
+        // console.log( "AccumulatedWeight:", accumulatedWeight );
+        // console.log( "Random * accumulatedWeight:", r );
+        // console.log( "Item's accumulatedWeight:", chosenEntry.accumulatedWeight );
+
+        return chosenEntry.index;
+    }
+
     const generateSpin = useCallback( () => {
         const random = ( min, max ) => Math.floor( Math.random() * ( max - min ) ) + min;
         const spin = {};
@@ -78,7 +106,7 @@ function Wheel( props ) {
         spin.spinStart = fullSpins * Math.PI + startPosition;
 
         // Calculating the spin stop
-        const prizeWon = random( 0, wheelItems.length );
+        const prizeWon = chooseItem( wheelItems );
         // The offset can have a range of anywhere 
         // from 0 * Math.PI / wheelItems.length 
         // to 2 * Math.PI / wheelItems.length
@@ -86,7 +114,7 @@ function Wheel( props ) {
         spin.spinStop = prizeWon * ( 2 * Math.PI / wheelItems.length ) + offset;
         
         console.log( fullSpins );
-        console.log( wheelItems[prizeWon] );
+        console.log( wheelItems[prizeWon].name );
 
         return spin;
     }, [ wheelItems ] );
@@ -131,7 +159,7 @@ function Wheel( props ) {
     return (
         <div className="wheel-container">
             <canvas className="border border-3 border-warning rounded-circle" ref={ canvasRef }/>
-            <Button variant="warning" className="spin-button" onClick={ spinWheel }>Spin the Wheel !</Button>
+            <Button className="spin-button" onClick={ spinWheel } variant="warning">Spin the Wheel !</Button>
         </div>
     );
 }
