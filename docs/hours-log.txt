@@ -58,5 +58,8 @@ TODO: * I want to add a 'chance' for each of the wheel items ( basically the odd
         have the same odds ) to work with this 'chance' factor. I have an idea of how to implement this but I want
         to look more into how this can be achieved.
       * I want to block the 'spin' button so it cannot be triggered during an ongoing spin.
-Summary: TO BE COMPLETED
+Summary: I looked on some game dev forums and I found a nice algorithm for randomly selecting an item
+         based on a weight ( basically a predisposition of that item being chosen ) and I managed to 
+         adapt it to my use case.
+         I also managed to lock the spin button so it cannot be used for the duration of one spin.
 *------*
