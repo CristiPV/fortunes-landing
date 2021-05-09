@@ -49,3 +49,14 @@ Summary: I created a button that triggers the indicator to spin around the wheel
          a random location on one of the items.
          I also imported react-bootstrap and did a bit of styling on the page.
 *------*
+
+ENTRY 4
+*------*
+Date: 09/05/2021 - Time Spent: 1hr, 59mins
+TODO: * I want to add a 'chance' for each of the wheel items ( basically the odds of that item being selected )
+        and then I will have to rework the way in which the way items are being chosen ( because now all of them
+        have the same odds ) to work with this 'chance' factor. I have an idea of how to implement this but I want
+        to look more into how this can be achieved.
+      * I want to block the 'spin' button so it cannot be triggered during an ongoing spin.
+Summary: TO BE COMPLETED
+*------*
