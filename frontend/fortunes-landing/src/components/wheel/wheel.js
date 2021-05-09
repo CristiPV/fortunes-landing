@@ -130,19 +130,22 @@ function Wheel( props ) {
         const render = () => {
             if ( rotation >= spin.spinStop ) {
                 drawWheel( context, rotation ); 
+                // Disabling the spin button while the animation is playing
+                spinButtonRef.current.classList.add( "disabled" );
+                // Using an exponential function with a negative exponent in order to determine the amount 
+                // to decrease from the rotation so we can simulate a smooth wheel spin animation
+                rotation -=  Math.PI / ( 1000  * ( 1.3 ** ( -rotation ) ) );
+                
+                animationFrameId = window.requestAnimationFrame(render);
+            } else {
+                // Re-enabling the spin button
+                spinButtonRef.current.classList.remove( "disabled" );
+
+                window.cancelAnimationFrame(animationFrameId);
             }
-
-            // Using an exponential function with a negative exponent in order to determine the amount 
-            // to decrease from the rotation so we can simulate a smooth wheel spin animation
-            rotation -=  Math.PI / ( 1000  * ( 1.3 ** ( -rotation ) ) );
-
-            animationFrameId = window.requestAnimationFrame(render);
         }
         render();
 
-        return () => {
-            window.cancelAnimationFrame(animationFrameId);
-        }
     }, [ drawWheel, generateSpin ] );   
 
     // Drawing the static Wheel when the component mounts.
@@ -159,7 +162,7 @@ function Wheel( props ) {
     return (
         <div className="wheel-container">
             <canvas className="border border-3 border-warning rounded-circle" ref={ canvasRef }/>
-            <Button className="spin-button" onClick={ spinWheel } variant="warning">Spin the Wheel !</Button>
+            <Button className="spin-button" ref={ spinButtonRef } onClick={ spinWheel } variant="warning">Spin the Wheel !</Button>
         </div>
     );
 }
