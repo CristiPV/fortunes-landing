@@ -1,5 +1,6 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import Button from 'react-bootstrap/Button';
+import ToastNotification from '../toastNotification/toastNotification.js'
 import '../wheel/wheel.css';
 
 function Wheel( props ) {
@@ -7,6 +8,8 @@ function Wheel( props ) {
     const wheelItems = props.items;
 
     // State
+    const [showToast, setShowToast] = useState( false );
+    const [prize, setPrize] = useState( "" );
 
     // Refs
     const canvasRef = useRef( null );
@@ -15,6 +18,8 @@ function Wheel( props ) {
     // Variables
     const circleRadius = 450;
     const canvasSize = 1000;
+
+    const toggleShowToast = () => setShowToast( !showToast );
 
     const drawCircle = useCallback( ( context ) => {  
         // Drawing the items
@@ -107,6 +112,7 @@ function Wheel( props ) {
 
         // Calculating the spin stop
         const prizeWon = chooseItem( wheelItems );
+        setPrize( wheelItems[prizeWon].name );
         // The offset can have a range of anywhere 
         // from 0 * Math.PI / wheelItems.length 
         // to 2 * Math.PI / wheelItems.length
@@ -131,20 +137,21 @@ function Wheel( props ) {
             if ( rotation >= spin.spinStop ) {
                 drawWheel( context, rotation ); 
                 // Disabling the spin button while the animation is playing
-                spinButtonRef.current.classList.add( "disabled" );
+                spinButtonRef.current.setAttribute( "disabled", true );
                 // Using an exponential function with a negative exponent in order to determine the amount 
                 // to decrease from the rotation so we can simulate a smooth wheel spin animation
                 rotation -=  Math.PI / ( 1000  * ( 1.3 ** ( -rotation ) ) );
                 
-                animationFrameId = window.requestAnimationFrame(render);
+                animationFrameId = window.requestAnimationFrame( render );
             } else {
                 // Re-enabling the spin button
-                spinButtonRef.current.classList.remove( "disabled" );
+                spinButtonRef.current.removeAttribute( "disabled" );
+                setShowToast( true );
 
                 window.cancelAnimationFrame(animationFrameId);
             }
         }
-        render();
+        render();   
 
     }, [ drawWheel, generateSpin ] );   
 
@@ -157,13 +164,27 @@ function Wheel( props ) {
         canvas.height = canvasSize;
 
         drawWheel( context, Math.PI * ( 3 / 2 ) );
-    }, [ drawWheel ] ); 
+    }, [ drawWheel ] );
+    
+    useEffect( () => {
+        console.log( prize );
+    }, [prize] );
 
     return (
-        <div className="wheel-container">
-            <canvas className="border border-3 border-warning rounded-circle" ref={ canvasRef }/>
-            <Button className="spin-button" ref={ spinButtonRef } onClick={ spinWheel } variant="warning">Spin the Wheel !</Button>
-        </div>
+        <>
+            <div className="wheel-container">
+                <canvas className="border border-3 border-warning rounded-circle" ref={ canvasRef }/>
+                <Button className="spin-button" ref={ spinButtonRef } onClick={ spinWheel } variant="warning">
+                    Spin the Wheel !
+                </Button>
+            </div>
+            <ToastNotification 
+                title="Congratulations !"
+                message={ "You won " + prize }
+                show={ showToast }
+                toggleShow={ toggleShowToast }
+            ></ToastNotification>
+        </>
     );
 }
 
