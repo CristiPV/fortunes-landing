@@ -7,32 +7,26 @@ function App() {
   const items = [
     {
       name: "Gummy Bears",
-      color: "red",
       weight: 10.0
     },
     {
       name: "Nothing",
-      color: "green",
       weight: 23.0
     },
     {
       name: "Laptop",
-      color: "salmon",
       weight: 5.0
     },
     {
       name: "Yacht",
-      color: "grey",
       weight: 2.0
     },
     {
       name: "Soap",
-      color: "purple",
       weight: 40.0
     },
     {
       name: "Headphones",
-      color: "olive",
       weight: 20.0
     }
   ];

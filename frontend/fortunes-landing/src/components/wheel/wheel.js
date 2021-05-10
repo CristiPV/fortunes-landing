@@ -21,7 +21,10 @@ function Wheel( props ) {
 
     const toggleShowToast = () => setShowToast( !showToast );
 
-    const drawCircle = useCallback( ( context ) => {  
+    const drawCircle = useCallback( ( context ) => { 
+        const drawColors = [ "#024249", "#fa744f", "#16817a", "#f79071" ];
+        const textColors = [ "#f79071", "#16817a" ];
+
         // Drawing the items
         for( let i in wheelItems ) {
             const startAngle = Number( i ) * ( Math.PI * 2 / wheelItems.length );
@@ -30,22 +33,37 @@ function Wheel( props ) {
 
             context.save();
 
-            context.font = "30px Arial";
-            context.fillStyle = wheelItems[i].color;
-            context.strokeStyle = wheelItems[i].color;
             context.lineWidth = 10;
             context.beginPath();
-            // Moving the context's drawing point to the middle of the canvas
-            context.moveTo( canvasSize / 2, canvasSize / 2 );
+            context.fillStyle = drawColors[ i % 2 + 2 ];
+            context.moveTo( canvasSize / 2, canvasSize / 2 );           // Moving the context's drawing point to the middle of the canvas
+            context.arc( canvasSize / 2, canvasSize / 2, circleRadius, startAngle, endAngle );
+            context.fill();
+            context.closePath();
+
+            context.beginPath();
+            context.strokeStyle = drawColors[ i % 2 ];
             context.arc( canvasSize / 2, canvasSize / 2, circleRadius, startAngle, endAngle );
             context.stroke();
+            context.closePath();
 
+            context.beginPath();
+            context.fillStyle = "antiquewhite";
+            context.moveTo( canvasSize / 2, canvasSize / 2 );
+            context.arc( canvasSize / 2, canvasSize / 2, 15, startAngle, endAngle );
+            context.fill();
+            
             // Adding the text
+            context.font = "30px Helvetica";
+            //context.lineWidth = 5;
+            context.fillStyle = textColors[ i % 2 ];
+            //context.strokeStyle = "#f79071";
             context.translate( canvasSize / 2, canvasSize / 2 );        // Moves the context itself to the middle of the canvas
             context.rotate( startAngle + Math.PI / wheelItems.length ); // Rotates the context to the angle that would be in the middle of the current arc
             context.translate( circleRadius * ( 4 / 5 ), 0 );           // Moves the context down to 4 fifths of the radius
             context.rotate( Math.PI / 2 );                              // Rotates 90° so that the text would be written along the arc
             context.textAlign = 'center';
+            //context.strokeText( wheelItems[i].name, 0, 0 );
             context.fillText( wheelItems[i].name, 0, 0 );
 
             context.restore();
@@ -55,14 +73,19 @@ function Wheel( props ) {
     function drawIndicator( context, rotation ) {
         context.save();
 
-        context.strokeStyle = "teal";
-        context.lineWidth = 30;
-        context.beginPath();
+        context.fillStyle = "antiquewhite";
         context.translate( canvasSize / 2, canvasSize / 2 );
         context.rotate( rotation );
-        context.moveTo( circleRadius - 50, 0 );
-        context.lineTo( circleRadius, 0 );
-        context.stroke();
+        context.beginPath();
+        context.moveTo( circleRadius - 45, 0 );
+        context.lineTo( circleRadius + 5, 18 );
+        context.lineTo( circleRadius + 5, -18 );
+        context.fill();
+        context.closePath();
+
+        context.beginPath();
+        context.arc( circleRadius + 1, 0, 12, 0, 2 * Math.PI);
+        context.fill();
 
         context.restore();
     }
@@ -171,7 +194,7 @@ function Wheel( props ) {
         <>
             <div className="wheel-container">
                 <canvas className="border border-3 border-warning rounded-circle" ref={ canvasRef }/>
-                <Button className="spin-button" ref={ spinButtonRef } onClick={ spinWheel } variant="warning">
+                <Button className="spin-button" ref={ spinButtonRef } onClick={ spinWheel } variant="outline-warning">
                     Spin the Wheel !
                 </Button>
             </div>
