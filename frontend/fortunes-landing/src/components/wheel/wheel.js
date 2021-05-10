@@ -126,9 +126,10 @@ function Wheel( props ) {
     }, [ wheelItems ] );
 
     const spinWheel = useCallback( () => {
+        setShowToast( false );
         const canvas = canvasRef.current;   
         const context = canvas.getContext( "2d" );
-        const spin = generateSpin();        
+        const spin = generateSpin(); 
 
         let rotation = spin.spinStart;
         let animationFrameId;
@@ -165,10 +166,6 @@ function Wheel( props ) {
 
         drawWheel( context, Math.PI * ( 3 / 2 ) );
     }, [ drawWheel ] );
-    
-    useEffect( () => {
-        console.log( prize );
-    }, [prize] );
 
     return (
         <>
@@ -180,7 +177,7 @@ function Wheel( props ) {
             </div>
             <ToastNotification 
                 title="Congratulations !"
-                message={ "You won " + prize }
+                message={ "You won: " + prize }
                 show={ showToast }
                 toggleShow={ toggleShowToast }
             ></ToastNotification>
