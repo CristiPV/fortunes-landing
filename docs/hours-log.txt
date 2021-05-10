@@ -63,3 +63,20 @@ Summary: I looked on some game dev forums and I found a nice algorithm for rando
          adapt it to my use case.
          I also managed to lock the spin button so it cannot be used for the duration of one spin.
 *------*
+
+ENTRY 5
+*------*
+Date: 10/05/2021 - Time Spent: 04hrs, 38mins
+TODO: * I want to add a toast notification congratulating the user for the prize he received
+      * I want to look into how to do some more complex styling in canvas to make the wheel look better
+Summary: Issue: I have been trying to work with the react-bootstrap toast component and for some reason
+         it does not work how it is meant to.
+         Fix: I had to downgrade 'bootstrap' dependency from 5.0.0 to 4.6.0 ( the reason is that on the
+         website of react-bootstrap I saw that current version of 'react-bootstrap' is 1.5.2 and it works 
+         with 'bootstrap' version of 4.6.0 )
+         Issue: The spin button no longer get disabled with this version of 'bootstrap'
+         Fix: I added the 'disabled' attribute to the html element of the button when I wanted it disabled
+         and removed it when I wanted it enabled.
+         In the end, I managed to both create the toast, notifying the user of the won prize, and style the
+         wheel along with the indicator after some long struggles to find the right shapes and colors :P 
+*------*
