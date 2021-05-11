@@ -4,6 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Wheel from './components/wheel/wheel';
 
 function App() {
+  /* 
+   * The list of items that will be present on the wheel.
+   * Each item has to have:
+   * - name: String
+   * - weight: double ( the predisposition of that item being selected )
+   * Later, this hardcoded list will be replaced with a list received from a database.
+   */
   const items = [
     {
       name: "Gummy Bears",
