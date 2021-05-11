@@ -80,3 +80,14 @@ Summary: Issue: I have been trying to work with the react-bootstrap toast compon
          In the end, I managed to both create the toast, notifying the user of the won prize, and style the
          wheel along with the indicator after some long struggles to find the right shapes and colors :P 
 *------*
+
+ENTRY 6
+*------*
+Date: 11/05/2021 - Time Spent: 3hrs, 17mins
+TODO: * I want to write the Readme file which describes the project, how to install and run it.
+      * I want to take a look at the comments I wrote so far, remove the unnecessary ones and add some more 
+        where they are needed.
+Summary: I managed to write the README.md file along with some more documentation, which I linked in it, as
+         well as rewriting the comments for my currently existing components.
+         I also replaced the icon and title that of the app and removed the unused png files.
+*------*
