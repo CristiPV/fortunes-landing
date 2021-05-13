@@ -7,9 +7,7 @@ import Wheel from './../../components/wheel/wheel';
 import './wheelPage.css';
 
 function WheelPage( props ) {
-    
-
-      /* 
+   /* 
     * The list of items that will be present on the wheel.
     * Each item has to have:
     * - name: String
