@@ -7,7 +7,7 @@ import Wheel from './../../components/wheel/wheel';
 import './wheelPage.css';
 
 function WheelPage( props ) {
-    const [prizeHistory, setPrizeHistory] = useState( [] );
+    
 
       /* 
     * The list of items that will be present on the wheel.
@@ -43,10 +43,6 @@ function WheelPage( props ) {
       }
     ];
 
-    useEffect( () => {
-      console.log( prizeHistory );
-    }, [ prizeHistory ] );
-
     return (
         <Container className="wheel-page">
             <Container className="wrapper">
@@ -60,7 +56,6 @@ function WheelPage( props ) {
                             <Link
                               to={ {
                                 pathname: "/history",
-                                state: { prizeHistory }
                               } }
                             >
                                 <Button variant="outline-dark">Prize History</Button>
@@ -69,7 +64,7 @@ function WheelPage( props ) {
                     </Dropdown.Menu>
                 </Dropdown>
             </Container>
-            <Wheel items={ items } prizeHistory={ { list: prizeHistory, setter: setPrizeHistory } }/>
+            <Wheel items={ items } prizeHistory={ props.prizeHistory }/>
         </Container>
     );
 }

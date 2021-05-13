@@ -1,14 +1,12 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Container, Table, Button } from 'react-bootstrap';
 
 import './historyPage.css';
 
 function HistoryPage( props ) {
-    const location = useLocation();
-
-    const prizeHistory = location.state.prizeHistory;
+    const prizeHistory = props.prizeHistory;
 
     return (
         <Container className="history-page">
@@ -27,7 +25,7 @@ function HistoryPage( props ) {
                     <tr>
                         <th>#</th>
                         <th>Prize</th>
-                        <th>Weight</th>
+                        <th>Chance</th>
                     </tr>
                 </thead>
                 <tbody>
