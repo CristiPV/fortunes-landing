@@ -10,6 +10,10 @@ import '../wheel/wheel.css';
  * - a ToastNotification component, once a prize has been won
  * Props:
  * - items: List ( contains the items to be displayed on the wheel )
+ * - prizeHistory: Object {
+ *     list: List ( the previously won items )
+ *     setter: Function ( the function that saves the state of the list )               
+ *   }
  * State:
  * - showToast: boolean ( determines if the toast should be displayed or not )
  * - prize: String ( the name of the prize )

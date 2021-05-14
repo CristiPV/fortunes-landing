@@ -5,6 +5,13 @@ import { Container, Table, Button } from 'react-bootstrap';
 
 import './historyPage.css';
 
+/*
+ * HistoryPage renders:
+ * - a 'Table' which contains the data of the previous winnings
+ * - a 'Button' to go back to the 'WheelPage'
+ * Props:
+ * - prizeHistory: List ( the previously won items )
+ */
 function HistoryPage( props ) {
     const prizeHistory = props.prizeHistory;
 

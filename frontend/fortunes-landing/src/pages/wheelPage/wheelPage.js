@@ -6,6 +6,16 @@ import Wheel from './../../components/wheel/wheel';
 
 import './wheelPage.css';
 
+/*
+ * WheelPage renders:
+ * - a 'Dropdown' component which contains a 'Button' that leads to the 'HistoryPage'
+ * - a 'Wheel' component
+ * Props:
+ * - prizeHistory: Object {
+ *     list: List ( the previously won items )
+ *     setter: Function ( the function that saves the state of the list )               
+ *   }
+ */
 function WheelPage( props ) {
    /* 
     * The list of items that will be present on the wheel.
