@@ -6,7 +6,7 @@ The user is presented a wheel with prizes and a button which can be clicked in o
 
 Every time a prize has been won, a **Toast** notification pops up, notifying the user about the win.
 
-*The history of won prizes can also be seen on a secondary page.* ***( TO BE IMPLEMENTED )***.
+The history of won prizes can also be seen on a secondary page.
 
 The project consists of a frontend application written in **React** and *an API written in Java, using Springboot* ***( TO BE IMPLEMENTED )***.
 
