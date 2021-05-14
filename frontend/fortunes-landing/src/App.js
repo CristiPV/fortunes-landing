@@ -1,42 +1,14 @@
+import React, { useState } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Wheel from './components/wheel/wheel';
+import WheelPage from './pages/wheelPage/wheelPage';
+import HistoryPage from './pages/historyPage/historyPage';
 
 function App() {
-  /* 
-   * The list of items that will be present on the wheel.
-   * Each item has to have:
-   * - name: String
-   * - weight: double ( the predisposition of that item being selected )
-   * Later, this hardcoded list will be replaced with a list received from a database.
-   */
-  const items = [
-    {
-      name: "Gummy Bears",
-      weight: 10.0
-    },
-    {
-      name: "Nothing",
-      weight: 23.0
-    },
-    {
-      name: "Laptop",
-      weight: 5.0
-    },
-    {
-      name: "Yacht",
-      weight: 2.0
-    },
-    {
-      name: "Soap",
-      weight: 40.0
-    },
-    {
-      name: "Headphones",
-      weight: 20.0
-    }
-  ];
+  const [prizeHistory, setPrizeHistory] = useState( [] );
 
   return (
     <div className="App" 
@@ -49,7 +21,16 @@ function App() {
         backgroundSize: "cover"
       } } 
     >
-       <Wheel items={ items }/>
+      <Router>
+        <Switch>
+          <Route exact path={ ['/wheel', ''] }>
+            <WheelPage prizeHistory={ { list: prizeHistory, setter: setPrizeHistory } }/>
+          </Route>
+          <Route exact path="/history">
+            <HistoryPage prizeHistory={ prizeHistory }/>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

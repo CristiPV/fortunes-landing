@@ -91,3 +91,23 @@ Summary: I managed to write the README.md file along with some more documentatio
          well as rewriting the comments for my currently existing components.
          I also replaced the icon and title that of the app and removed the unused png files.
 *------*
+
+ENTRY 7
+*------*
+Date: 13/05/2021 - Time Spent: 3hrs, 23mins
+TODO: * I want to implement React Router, turn the current app into one page and create another page where 
+        the history of all prizes won can be displayed ( as of right now, I think it will only be the history
+        since the app has been launched, later I am thinking to even save and retrieve the history list
+        from a database ).
+Summary: Issue: after making two pages ( WheelPage and HistoryPage ) I couldn't switch between the two by
+         changing the path in the browser.
+         Fix: When I create the '<Route>'s I need to use the 'exact' keyword in order for the router to look
+         for the exact path instead of using the partial matching. ( even though partial matching should be
+         just fine for my routes :/ )
+         Issue: I implemented the history, although every time I leave the history page, it resets.
+         Fix: I just had to move the prize history list to App.js and pass it to both pages ( it 
+         will be completely removed once I implement the database, though ).
+         I managed to implement React Router and create two pages: the wheel page which contains the 
+         wheel component and a button to go to the history page, and the history page which contains
+         a table with all the winnings that have occurred in that session and a back button.
+*------*

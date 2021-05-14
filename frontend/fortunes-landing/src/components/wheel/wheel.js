@@ -10,6 +10,10 @@ import '../wheel/wheel.css';
  * - a ToastNotification component, once a prize has been won
  * Props:
  * - items: List ( contains the items to be displayed on the wheel )
+ * - prizeHistory: Object {
+ *     list: List ( the previously won items )
+ *     setter: Function ( the function that saves the state of the list )               
+ *   }
  * State:
  * - showToast: boolean ( determines if the toast should be displayed or not )
  * - prize: String ( the name of the prize )
@@ -17,6 +21,8 @@ import '../wheel/wheel.css';
 function Wheel( props ) {
     // Props
     const wheelItems = props.items;
+    const prizeHistory = props.prizeHistory.list;
+    const setPrizeHistory = props.prizeHistory.setter;
 
     // State
     const [showToast, setShowToast] = useState( false );
@@ -175,11 +181,14 @@ function Wheel( props ) {
         // Calculating the spin stop
         const prizeWon = chooseItem( wheelItems );
         setPrize( wheelItems[prizeWon].name );
+
+        prizeHistory.push( wheelItems[prizeWon] );
+
         const offset = ( random( 1, 200 ) / 100 ) * Math.PI / wheelItems.length;
         spin.spinStop = prizeWon * ( 2 * Math.PI / wheelItems.length ) + offset;
 
         return spin;
-    }, [ wheelItems ] );
+    }, [ wheelItems, prizeHistory ] );
 
     /*
      * spinWheel - plays the animation of the indicator spinning around the wheel
@@ -210,6 +219,7 @@ function Wheel( props ) {
             } else {
                 // What happens after the animation has stopped
                 spinButtonRef.current.removeAttribute( "disabled" );
+                setPrizeHistory( prizeHistory );
                 setShowToast( true );
 
                 window.cancelAnimationFrame(animationFrameId);
@@ -217,7 +227,7 @@ function Wheel( props ) {
         }
         render();   
 
-    }, [ drawWheel, generateSpin ] );   
+    }, [ drawWheel, generateSpin, prizeHistory, setPrizeHistory ] );   
 
     // Prepares the canvas and draws the wheel in the standard position.
     useEffect( () => {
