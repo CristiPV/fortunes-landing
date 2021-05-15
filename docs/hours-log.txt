@@ -124,3 +124,16 @@ Summary: I added comments on the two page components and updated the README. Aft
          I created a new Springboot project with the Spring Initializr through IntelliJ, set up
          the configuration to connect to my DB and created the model classes based on the ERD.
 *------*
+
+ENTRY 9
+*------*
+Date: 15/05/2021 - Time Spent: 5hrs, 14mins
+TODO: * Fix ERD ( I mistakenly used the wrong relationship line in between my 2 tables )
+      * Finish API.
+      * Look into CORS
+Summary: I fixed the ERD to now contain the correct relationship and data types.
+         I finished implementing the REST API and tested it with Postman to make sure it all works
+         as intended. I also wrote javadoc comments in the relevant places and created a 
+         population script which provides a few starting prizes.
+         I updated the README file with relevant information about the API.
+*------*
