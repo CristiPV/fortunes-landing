@@ -4,6 +4,10 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Represents the 'history' table of the database.
+ * It contains a date and a prize item.
+ */
 @Entity
 @Table( name = "history" )
 public class History

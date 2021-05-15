@@ -3,6 +3,11 @@ package com.fortuneslanding.api.model;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Represents the 'prize' table of the database.
+ * It contains: the name of the prize, a description of it, a preset which it belongs to and a weight which determines
+ * the probability of that item being won in a game.
+ */
 @Entity
 @Table( name= "prize" )
 public class Prize
