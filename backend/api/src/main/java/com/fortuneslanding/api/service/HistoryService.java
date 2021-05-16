@@ -24,7 +24,7 @@ public class HistoryService
      * @return the list of History entries
      */
     public List<History> getAll() {
-        return historyRepo.findAll();
+        return historyRepo.findAllByOrderByDateDesc();
     }
 
     /**
