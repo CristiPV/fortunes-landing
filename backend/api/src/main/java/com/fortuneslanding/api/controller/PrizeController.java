@@ -19,6 +19,7 @@ import java.util.List;
  * PUT     /prizes/id     - updates a prize entry with the provided id
  * DELETE  /prizes/id     - deletes a prize entry with the provided id
  */
+@CrossOrigin
 @RestController
 @RequestMapping( value = "prizes" )
 public class PrizeController
