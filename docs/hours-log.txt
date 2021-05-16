@@ -137,3 +137,34 @@ Summary: I fixed the ERD to now contain the correct relationship and data types.
          population script which provides a few starting prizes.
          I updated the README file with relevant information about the API.
 *------*
+
+ENTRY 10
+*------*
+Date: 16/05/2021 - Time Spent: 5hrs, 54mins
+TODO: * Write some endpoints documentation for the API.
+      * Install and setup Axios for the React App.
+      * Connect the app to the API.
+Summary: I wrote the endpoints documentation and I updated the API to work with CORS. Then I imported Axios
+         on the frontend app, I configured it and implemented a few generic functions that I can use from
+         the components. I added an environment variable which contains the API url that the app is supposed
+         to call.
+         Issues I encountered:
+          - Issue 1:
+          Context: I wanted that after every spin, a new history entry would be created with the prize
+          information. That means that after each spin animation ends, an api call would be made, sending
+          the prize information ( stored in the state of the component ).
+          Issue: The state, being async, did not update before the API call was supposed to be made.
+          ( but somehow it did update fast enough for the Toast notification that shows up at the same time )
+          Fix: I got a hold of the prize information without using the prize saved in the state.
+          ( more of a bypass than a fix )
+
+          - Issue 2: The table on the history page gets filled rather quickly and gets outside of the screen
+            - Fix: It was solved by just added class "overflow-auto" on the container of the table ( bootstrap )
+
+          - Issue 3: The history received entries ordered by id, which meant latest entries showed last 
+           - Fix: I made it so the API actually returns the items ordered descended by date, because that
+           makes more sense. 
+
+          Before ending it for today,I got a bit carried over and implemented a way of changing the wheel
+          items based on a preset that is selected from an input.
+*------*
