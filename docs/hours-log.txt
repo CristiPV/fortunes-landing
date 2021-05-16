@@ -111,3 +111,29 @@ Summary: Issue: after making two pages ( WheelPage and HistoryPage ) I couldn't 
          wheel component and a button to go to the history page, and the history page which contains
          a table with all the winnings that have occurred in that session and a back button.
 *------*
+
+ENTRY 8
+*------*
+Date: 14/05/2021 - Time Spent: 2hrs, 52mins
+TODO: * Clean up and finish the history feature
+      * Design an ERD
+      * Create a Springboot project and start working on the API
+Summary: I added comments on the two page components and updated the README. Afterwards, I created a
+         MySQL RDS Instance on AWS. I created an ERD of how I currently want the database to look like 
+         and wrote a creation script which I then ran on the db to test it.
+         I created a new Springboot project with the Spring Initializr through IntelliJ, set up
+         the configuration to connect to my DB and created the model classes based on the ERD.
+*------*
+
+ENTRY 9
+*------*
+Date: 15/05/2021 - Time Spent: 5hrs, 14mins
+TODO: * Fix ERD ( I mistakenly used the wrong relationship line in between my 2 tables )
+      * Finish API.
+      * Look into CORS
+Summary: I fixed the ERD to now contain the correct relationship and data types.
+         I finished implementing the REST API and tested it with Postman to make sure it all works
+         as intended. I also wrote javadoc comments in the relevant places and created a 
+         population script which provides a few starting prizes.
+         I updated the README file with relevant information about the API.
+*------*
