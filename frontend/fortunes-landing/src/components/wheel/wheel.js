@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import Button from 'react-bootstrap/Button';
-import ToastNotification from '../toastNotification/toastNotification.js'
+import Api from '../../api/api.js';
+import ToastNotification from '../toastNotification/toastNotification.js';
+
 import '../wheel/wheel.css';
 
 /*
@@ -10,23 +12,20 @@ import '../wheel/wheel.css';
  * - a ToastNotification component, once a prize has been won
  * Props:
  * - items: List ( contains the items to be displayed on the wheel )
- * - prizeHistory: Object {
- *     list: List ( the previously won items )
- *     setter: Function ( the function that saves the state of the list )               
- *   }
  * State:
  * - showToast: boolean ( determines if the toast should be displayed or not )
- * - prize: String ( the name of the prize )
+ * - prizeName: String ( prize that has been won )
+ * API Calls:
+ * - create( "/history", { prize: spin.prize, date: new Date() } ) -> creates 
+ * a history entry once a prize has been won and saves the current time
  */
 function Wheel( props ) {
     // Props
     const wheelItems = props.items;
-    const prizeHistory = props.prizeHistory.list;
-    const setPrizeHistory = props.prizeHistory.setter;
 
     // State
     const [showToast, setShowToast] = useState( false );
-    const [prize, setPrize] = useState( "" );
+    const [prizeName, setPrizeName] = useState( {} );
 
     // Refs
     const canvasRef = useRef( null );
@@ -179,16 +178,15 @@ function Wheel( props ) {
         spin.spinStart = fullSpins * Math.PI + startPosition;
 
         // Calculating the spin stop
-        const prizeWon = chooseItem( wheelItems );
-        setPrize( wheelItems[prizeWon].name );
-
-        prizeHistory.push( wheelItems[prizeWon] );
+        const prizeIndex = chooseItem( wheelItems );
+        setPrizeName( wheelItems[prizeIndex].name );
+        spin.prize = wheelItems[prizeIndex];
 
         const offset = ( random( 1, 200 ) / 100 ) * Math.PI / wheelItems.length;
-        spin.spinStop = prizeWon * ( 2 * Math.PI / wheelItems.length ) + offset;
+        spin.spinStop = prizeIndex * ( 2 * Math.PI / wheelItems.length ) + offset;
 
         return spin;
-    }, [ wheelItems, prizeHistory ] );
+    }, [ wheelItems ] );
 
     /*
      * spinWheel - plays the animation of the indicator spinning around the wheel
@@ -219,7 +217,7 @@ function Wheel( props ) {
             } else {
                 // What happens after the animation has stopped
                 spinButtonRef.current.removeAttribute( "disabled" );
-                setPrizeHistory( prizeHistory );
+                Api.create( "/history", { prize: spin.prize, date: new Date() } );
                 setShowToast( true );
 
                 window.cancelAnimationFrame(animationFrameId);
@@ -227,7 +225,7 @@ function Wheel( props ) {
         }
         render();   
 
-    }, [ drawWheel, generateSpin, prizeHistory, setPrizeHistory ] );   
+    }, [ drawWheel, generateSpin ] );   
 
     // Prepares the canvas and draws the wheel in the standard position.
     useEffect( () => {
@@ -250,7 +248,7 @@ function Wheel( props ) {
             </div>
             <ToastNotification 
                 title="Congratulations !"
-                message={ "You won: " + prize }
+                message={ "You won: " + prizeName }
                 show={ showToast }
                 toggleShow={ toggleShowToast }
             ></ToastNotification>

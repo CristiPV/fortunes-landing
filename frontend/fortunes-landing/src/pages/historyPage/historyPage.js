@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Api from '../../api/api.js';
 
 import { Container, Table, Button } from 'react-bootstrap';
 
@@ -9,11 +10,18 @@ import './historyPage.css';
  * HistoryPage renders:
  * - a 'Table' which contains the data of the previous winnings
  * - a 'Button' to go back to the 'WheelPage'
- * Props:
- * - prizeHistory: List ( the previously won items )
+ * State:
+ * - historyEntries: List ( list of all prizes that have been won )
+ * API Calls:
+ * - getAll( "/history", setHistoryEntries ) -> gets a list of all history entries and stores it in
+ *   the historyEntries list
  */
 function HistoryPage( props ) {
-    const prizeHistory = props.prizeHistory;
+    const [historyEntries, setHistoryEntries] = useState( [] );
+
+    useEffect( () => {
+        Api.getAll( "/history", setHistoryEntries );
+    }, [] );
 
     return (
         <Container className="history-page">
@@ -31,23 +39,31 @@ function HistoryPage( props ) {
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Date</th>
                         <th>Prize</th>
-                        <th>Chance</th>
+                        <th>Description</th>
+                        <th>Preset</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        prizeHistory.map( ( prize, index ) => {
+                        historyEntries.map( ( entry, index ) => {
                             return(
                                 <tr key={ index }>
                                     <td>
-                                        { index }
+                                        { entry.id }
                                     </td>
                                     <td>
-                                        { prize.name }
+                                        { entry.date }
                                     </td>
                                     <td>
-                                        { prize.weight }
+                                        { entry.prize.name }
+                                    </td>
+                                    <td>
+                                        { entry.prize.description }
+                                    </td>
+                                    <td>
+                                        { entry.prize.preset }
                                     </td>
                                 </tr>
                             );
