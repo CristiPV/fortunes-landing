@@ -24,6 +24,11 @@ Use the package manager [npm](https://www.npmjs.com) to install the project's de
 ```
 npm install
 ```
+
+The App is using an **environment variable**: `REACT_APP_API_URL` - it contains base URL to the API.
+
+A `.env` file has to be created with all the **environment variables** specified in the `.env-template` in the root folder of the **React app**.
+
 ---
 
 The API is using an **environment variable**: `FORTUNES_LANDING_URL` - it contains the connection link to the database.

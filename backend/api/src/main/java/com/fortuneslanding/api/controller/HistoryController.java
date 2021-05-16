@@ -19,6 +19,7 @@ import java.util.List;
  * PUT     /history/id     - updates a history entry with the provided id
  * DELETE  /history/id     - deletes a history entry with the provided id
  */
+@CrossOrigin
 @RestController
 @RequestMapping( value = "history" )
 public class HistoryController

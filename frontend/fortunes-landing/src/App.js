@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import './App.css';
@@ -8,8 +8,6 @@ import WheelPage from './pages/wheelPage/wheelPage';
 import HistoryPage from './pages/historyPage/historyPage';
 
 function App() {
-  const [prizeHistory, setPrizeHistory] = useState( [] );
-
   return (
     <div className="App" 
       style={ { 
@@ -24,10 +22,10 @@ function App() {
       <Router>
         <Switch>
           <Route exact path={ ['/wheel', ''] }>
-            <WheelPage prizeHistory={ { list: prizeHistory, setter: setPrizeHistory } }/>
+            <WheelPage />
           </Route>
           <Route exact path="/history">
-            <HistoryPage prizeHistory={ prizeHistory }/>
+            <HistoryPage />
           </Route>
         </Switch>
       </Router>
