@@ -35,42 +35,44 @@ function HistoryPage( props ) {
                 </Link>
             </Container>
 
-            <Table striped bordered hover variant="dark">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Date</th>
-                        <th>Prize</th>
-                        <th>Description</th>
-                        <th>Preset</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        historyEntries.map( ( entry, index ) => {
-                            return(
-                                <tr key={ index }>
-                                    <td>
-                                        { entry.id }
-                                    </td>
-                                    <td>
-                                        { entry.date }
-                                    </td>
-                                    <td>
-                                        { entry.prize.name }
-                                    </td>
-                                    <td>
-                                        { entry.prize.description }
-                                    </td>
-                                    <td>
-                                        { entry.prize.preset }
-                                    </td>
-                                </tr>
-                            );
-                        } )
-                    }
-                </tbody>
-            </Table>
+            <Container className="overflow-auto">
+                <Table striped bordered hover variant="dark">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Prize</th>
+                            <th>Description</th>
+                            <th>Preset</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            historyEntries.map( ( entry, index ) => {
+                                return(
+                                    <tr key={ index }>
+                                        <td>
+                                            { entry.id }
+                                        </td>
+                                        <td>
+                                            { entry.date }
+                                        </td>
+                                        <td>
+                                            { entry.prize.name }
+                                        </td>
+                                        <td>
+                                            { entry.prize.description }
+                                        </td>
+                                        <td>
+                                            { entry.prize.preset }
+                                        </td>
+                                    </tr>
+                                );
+                            } )
+                        }
+                    </tbody>
+                </Table>
+            </Container>
         </Container>
     );
 }
