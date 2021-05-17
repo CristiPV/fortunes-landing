@@ -132,7 +132,7 @@ function Wheel( props ) {
     }, [ drawCircle ] );
 
     /*
-     * chooseItem - chooses an item in the given list randomly, based in its weight.
+     * chooseItem - chooses an item in the given list randomly, based on its weight.
      * The weight can be seen as a predisposition of that item to be chosen.
      * Note: if the sum of all weights would be 100, they can be thought of as 
      * percentages ( but they don't need to sum up to 100 ).
@@ -166,7 +166,7 @@ function Wheel( props ) {
      * plus an offset which can range from 0 * Math.PI / wheelItems.length ( beginning of the slice )
      * to 2 * Math.PI / wheelItems.length ( end of the slice ).
      * Returns:
-     * - spin: Object ( contains the spinStart: Number and the spinStop: Number )
+     * - spin: Object ( contains the spinStart: Number, the spinStop: Number and prize: Object )
      */
     const generateSpin = useCallback( () => {
         const random = ( min, max ) => Math.floor( Math.random() * ( max - min ) ) + min;
