@@ -1,0 +1,15 @@
+.history-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    height: 90%;
+    width: 90%;
+}
+
+.history-page .link-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 3vh;
+}

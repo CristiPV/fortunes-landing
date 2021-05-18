@@ -1,0 +1,170 @@
+ENTRY 1
+*-----*
+Date: 06/05/2021 - Time Spent: 1hr, 58mins
+TODO: * Write the Business Plan - I need to do some research about what a Business Plan
+        is and what information I need to provide with it. Afterwards, I need to write
+        the plan.
+      * Create an empty / default React App - I have decided to use a React App for the
+        frontend part of the assignment. For today, I want to only create the default
+        React App which I can later use to make the wheel.
+Summary: I managed to do the research about the Business Plan and write a brief one which
+         describes the product, its target audience, how it will make profit and what costs
+         need to be taken into consideration.
+         I also created a React App in a folder called 'frontend' ( I plan to have the following
+         folder structure for the project: docs - documentation, frontend - frontend app,
+         backend - the backend api ).
+*------*
+
+ENTRY 2
+*------*
+Date: 07/05/2021 - Time Spent: 04hrs, 48mins
+TODO: * Create the wheel - I need to figure out a way to create a wheel, in the style of
+        a pie chart, which can take a number 'n' and create 'n' amount of equal "slices"
+        within it ( I am thinking to use Canvas for this ).
+      * Think of how to implement the "spin" - I have thought of either having an moving
+        indicator which will move from "slice" to "slice" until it stops on one, or having
+        a static indicator and making the wheel rotate.
+Summary: I managed to draw the wheel in canvas with any 'n' amount of items and I also managed
+         to find a way to draw a little indicator and animate it so that it spins for any given
+         amount of rotations ( 'x' * PI, where, for example, 2 * PI would be 360° = full rotation )
+         ** One problem I encountered was the fact that I wanted the indicator 
+         to slow down as it approached the end of the animation and I figured I could use some sort
+         of exponential function. Due to the fact that I haven't worked with this level of Maths in a 
+         long time, I felt the need to call a friend who studies Maths and see if he could come up with
+         a mathematical function for my use case. Thankfully he did, and I ended up implementing that in 
+         my code.
+*------*
+
+ENTRY 3
+*------*
+Date: 08/05/2021 - Time Spent: 2hrs, 30mins
+TODO: * Create a button that triggers the spin.
+      * Figure out a way of selecting which prize is won - I am thinking that I can make it so that
+        the winning prize is decided the moment the button is pushed by using a function to randomly
+        choose one item. I want to further refine it so that once it is decided which prize the indicator
+        has to end up pointing to, a function will generate a random position on the item's 'slice'
+        of the wheel so it simulates a real wheel ( and the indicator doesn't always end up in the
+        center of the item ).
+Summary: I created a button that triggers the indicator to spin around the wheel until it reaches
+         a random location on one of the items.
+         I also imported react-bootstrap and did a bit of styling on the page.
+*------*
+
+ENTRY 4
+*------*
+Date: 09/05/2021 - Time Spent: 1hr, 59mins
+TODO: * I want to add a 'chance' for each of the wheel items ( basically the odds of that item being selected )
+        and then I will have to rework the way in which the way items are being chosen ( because now all of them
+        have the same odds ) to work with this 'chance' factor. I have an idea of how to implement this but I want
+        to look more into how this can be achieved.
+      * I want to block the 'spin' button so it cannot be triggered during an ongoing spin.
+Summary: I looked on some game dev forums and I found a nice algorithm for randomly selecting an item
+         based on a weight ( basically a predisposition of that item being chosen ) and I managed to 
+         adapt it to my use case.
+         I also managed to lock the spin button so it cannot be used for the duration of one spin.
+*------*
+
+ENTRY 5
+*------*
+Date: 10/05/2021 - Time Spent: 04hrs, 38mins
+TODO: * I want to add a toast notification congratulating the user for the prize he received
+      * I want to look into how to do some more complex styling in canvas to make the wheel look better
+Summary: Issue: I have been trying to work with the react-bootstrap toast component and for some reason
+         it does not work how it is meant to.
+         Fix: I had to downgrade 'bootstrap' dependency from 5.0.0 to 4.6.0 ( the reason is that on the
+         website of react-bootstrap I saw that current version of 'react-bootstrap' is 1.5.2 and it works 
+         with 'bootstrap' version of 4.6.0 )
+         Issue: The spin button no longer get disabled with this version of 'bootstrap'
+         Fix: I added the 'disabled' attribute to the html element of the button when I wanted it disabled
+         and removed it when I wanted it enabled.
+         In the end, I managed to both create the toast, notifying the user of the won prize, and style the
+         wheel along with the indicator after some long struggles to find the right shapes and colors :P 
+*------*
+
+ENTRY 6
+*------*
+Date: 11/05/2021 - Time Spent: 3hrs, 17mins
+TODO: * I want to write the Readme file which describes the project, how to install and run it.
+      * I want to take a look at the comments I wrote so far, remove the unnecessary ones and add some more 
+        where they are needed.
+Summary: I managed to write the README.md file along with some more documentation, which I linked in it, as
+         well as rewriting the comments for my currently existing components.
+         I also replaced the icon and title that of the app and removed the unused png files.
+*------*
+
+ENTRY 7
+*------*
+Date: 13/05/2021 - Time Spent: 3hrs, 23mins
+TODO: * I want to implement React Router, turn the current app into one page and create another page where 
+        the history of all prizes won can be displayed ( as of right now, I think it will only be the history
+        since the app has been launched, later I am thinking to even save and retrieve the history list
+        from a database ).
+Summary: Issue: after making two pages ( WheelPage and HistoryPage ) I couldn't switch between the two by
+         changing the path in the browser.
+         Fix: When I create the '<Route>'s I need to use the 'exact' keyword in order for the router to look
+         for the exact path instead of using the partial matching. ( even though partial matching should be
+         just fine for my routes :/ )
+         Issue: I implemented the history, although every time I leave the history page, it resets.
+         Fix: I just had to move the prize history list to App.js and pass it to both pages ( it 
+         will be completely removed once I implement the database, though ).
+         I managed to implement React Router and create two pages: the wheel page which contains the 
+         wheel component and a button to go to the history page, and the history page which contains
+         a table with all the winnings that have occurred in that session and a back button.
+*------*
+
+ENTRY 8
+*------*
+Date: 14/05/2021 - Time Spent: 2hrs, 52mins
+TODO: * Clean up and finish the history feature
+      * Design an ERD
+      * Create a Springboot project and start working on the API
+Summary: I added comments on the two page components and updated the README. Afterwards, I created a
+         MySQL RDS Instance on AWS. I created an ERD of how I currently want the database to look like 
+         and wrote a creation script which I then ran on the db to test it.
+         I created a new Springboot project with the Spring Initializr through IntelliJ, set up
+         the configuration to connect to my DB and created the model classes based on the ERD.
+*------*
+
+ENTRY 9
+*------*
+Date: 15/05/2021 - Time Spent: 5hrs, 14mins
+TODO: * Fix ERD ( I mistakenly used the wrong relationship line in between my 2 tables )
+      * Finish API.
+      * Look into CORS
+Summary: I fixed the ERD to now contain the correct relationship and data types.
+         I finished implementing the REST API and tested it with Postman to make sure it all works
+         as intended. I also wrote javadoc comments in the relevant places and created a 
+         population script which provides a few starting prizes.
+         I updated the README file with relevant information about the API.
+*------*
+
+ENTRY 10
+*------*
+Date: 16/05/2021 - Time Spent: 5hrs, 54mins
+TODO: * Write some endpoints documentation for the API.
+      * Install and setup Axios for the React App.
+      * Connect the app to the API.
+Summary: I wrote the endpoints documentation and I updated the API to work with CORS. Then I imported Axios
+         on the frontend app, I configured it and implemented a few generic functions that I can use from
+         the components. I added an environment variable which contains the API url that the app is supposed
+         to call.
+         Issues I encountered:
+          - Issue 1:
+          Context: I wanted that after every spin, a new history entry would be created with the prize
+          information. That means that after each spin animation ends, an api call would be made, sending
+          the prize information ( stored in the state of the component ).
+          Issue: The state, being async, did not update before the API call was supposed to be made.
+          ( but somehow it did update fast enough for the Toast notification that shows up at the same time )
+          Fix: I got a hold of the prize information without using the prize saved in the state.
+          ( more of a bypass than a fix )
+
+          - Issue 2: The table on the history page gets filled rather quickly and gets outside of the screen
+            - Fix: It was solved by just added class "overflow-auto" on the container of the table ( bootstrap )
+
+          - Issue 3: The history received entries ordered by id, which meant latest entries showed last 
+           - Fix: I made it so the API actually returns the items ordered descended by date, because that
+           makes more sense. 
+
+          Before ending it for today,I got a bit carried over and implemented a way of changing the wheel
+          items based on a preset that is selected from an input.
+*------*
